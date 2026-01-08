@@ -7,13 +7,43 @@ import { useTheme } from 'next-themes';
 import { Sun, Moon } from '@phosphor-icons/react/dist/ssr';
 import { useMenu } from '../context/ContextMenu';
 
-const mainLinks = ["What We Do", "About Us", "Latest News", "Get in Touch"];
-const projectLinks = ["JAU", "Deuz", "HockeyStick", "Con Todo!"];
+const mainLinks = ["Qué hacemos", "Sobre nosotros", "Noticias", "Contacto"];
+const projectLinks = [
+    {
+        id: 1,
+        link: 'JAU',
+        // USA LA CLASE COMPLETA AQUÍ:
+        color: 'bg-white/10 text-white hover:bg-emerald-600', 
+        url: '/jau',
+    },
+    {
+        id: 2,
+        link: 'Deuz',
+        color: 'bg-white/10 text-white hover:bg-red-700',
+        url: '/deuz',
+    },
+    {
+        id: 3,
+        link: 'HockeyStick',
+        color: 'bg-white/10 text-white hover:bg-purple-700',
+        url: '/hs',
+    },
+    {
+        id: 4,
+        link: 'Con Todo!',
+        color: 'bg-white/10 text-white hover:bg-amber-600',
+        url: '/ctodo',
+    },
+];
+
 const blogPosts = [
     { id: 1, date: "Jul 2025", title: "PlayerZero raises $16M in a Series A funding round" },
     { id: 2, date: "Jun 2025", title: "Designing a New Relationship with AI by Sara Vienna" },
-    { id: 3, date: "Jun 2025", title: "Metalab named Design Company of the Year finalist" },
+    { id: 3, date: "Ene 2026", title: "Metalab named Design Company of the Year finalist" },
 ];
+const featuredPost = [
+    { id: 1, date: "Jul 2025", title: "Ve nuestro study case de ¡Con Todo!", image: "/bg1.png" }
+]
 
 export default function FullScreenMenu() {
     const { isOpen, closeMenu } = useMenu();
@@ -27,7 +57,7 @@ export default function FullScreenMenu() {
   return (
 <div 
   className={`
-    fixed inset-0 z-[90] flex flex-col justify-center items-center
+    fixed inset-0 z-90 flex flex-col justify-center items-center
     transition-all duration-300 ease-in-out
     ${isOpen ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'}
     
@@ -39,13 +69,13 @@ export default function FullScreenMenu() {
             Esto hace que en móvil no existan, y en desktop aparezcan para crear la ventana. */}
         
         {/* Top Bar */}
-        <div className="hidden md:block absolute top-0 left-0 w-full h-[10vh] bg-white dark:bg-neutral-950 z-0" />
+        <div className="hidden md:block absolute top-0 left-0 w-full h-[10vh] bg-white dark:bg-black z-10" />
         {/* Bottom Bar */}
-        <div className="hidden md:block absolute bottom-0 left-0 w-full h-[10vh] bg-white dark:bg-neutral-950 z-0" />
+        <div className="hidden md:block absolute bottom-0 left-0 w-full h-[10vh] bg-white dark:bg-black z-10" />
         {/* Left Bar */}
-        <div className="hidden md:block absolute top-0 left-0 h-full w-[30vw] bg-white dark:bg-neutral-950 z-0" />
+        <div className="hidden md:block absolute top-0 left-0 h-full w-[30vw] bg-white dark:bg-black z-10" />
         {/* Right Bar */}
-        <div className="hidden md:block absolute top-0 right-0 h-full w-[30vw] bg-white dark:bg-neutral-950 z-0" />
+        <div className="hidden md:block absolute top-0 right-0 h-full w-[30vw] bg-white dark:bg-black z-10" />
 
 
         {/* === CONTENIDO === */}
@@ -54,29 +84,19 @@ export default function FullScreenMenu() {
             
             {/* Botones Flotantes */}
             <div className="absolute top-6 right-6 md:top-24 md:right-12 flex flex-col gap-4 pointer-events-auto">
-            <button 
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        className="..."
-      >
-        {/* 4. Renderizado Condicional Seguro */}
-        {/* Si no está montado, no mostramos icono (o mostramos un div vacío) para evitar el error */}
-        {mounted ? (
-           theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />
-        ) : (
-           <div className="w-5 h-5" /> // Espacio vacío del mismo tamaño
-        )}
-      </button>
+            
             </div>
 
             {/* Links Izquierda */}
             <div className="md:col-span-3 flex flex-col justify-center h-full pointer-events-auto mb-10 md:mb-0">
                  <nav className="flex flex-col gap-6 items-start">
+                    <img src="logo_rms_w.svg" alt="" className="h-6"/>
                     {mainLinks.map((link, i) => (
                     <Link 
                         key={i} 
                         href="#" 
                         onClick={closeMenu} 
-                        className="text-4xl md:text-5xl font-noopla hover:opacity-50 transition-opacity text-black dark:text-white"
+                        className="text-4xl md:text-sm md:hover:text-xl transition-all hover-target font-noopla hover:opacity-50 text-black dark:text-white"
                         style={{ fontFamily: 'var(--font-jakarta)' }}
                     >
                         {link}
@@ -85,29 +105,43 @@ export default function FullScreenMenu() {
                  </nav>
                  
                  <div className="mt-12 flex flex-col gap-4 items-start">
-                    <p className="text-xs font-mono opacity-50 text-black dark:text-white">CASE STUDIES</p>
-                    <div className="flex flex-wrap gap-2 max-w-[200px]">
+                    <p className="text-xs text-black dark:text-white" style={{ fontFamily: 'var(--font-jakarta)' }}>CASE STUDIES</p>
+                    <div className="flex flex-wrap gap-2 max-w-50">
                         {projectLinks.map((link, i) => (
-                        <button key={i} className="px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-xs font-jakarta hover:bg-black/10 transition-colors text-black dark:text-white">
-                            {link}
+                         <Link key={i} href={`${link.url}`} onClick={closeMenu} className={` rounded-full text-xs font-jakarta transition-colors ${link.color} text-black`}>
+                         <button key={i} className={`px-3 py-1 rounded-full text-xs font-jakarta transition-colors ${link.color} text-black`}>
+                            {link.link}
                         </button>
+                        </Link>
                         ))}
                     </div>
                  </div>
             </div>
 
             {/* Centro Hueco (Solo sirve para espaciar en desktop, en móvil lo ocultamos para que no ocupe espacio si tuviera altura) */}
-            <div className="hidden md:block md:col-span-6 pointer-events-none"></div>
+            <div className="hidden md:block md:col-span-6 pointer-events-none  z-0"></div>
 
             {/* Blog Derecha */}
-            <div className="md:col-span-3 flex flex-col justify-center h-full md:pl-8 pointer-events-auto">
-                {blogPosts.map((post, i) => (
-                <div key={i} className="group cursor-pointer mb-8">
-                    <p className="text-xs font-mono opacity-50 mb-2 text-black dark:text-white">{post.date}</p>
-                    <h4 className="font-jakarta text-sm md:text-base font-medium leading-snug group-hover:underline text-black dark:text-white">
+            <div className="md:col-span-3 flex flex-col gap-2 justify-center h-full md:pl-8 pointer-events-auto " style={{ fontFamily: 'var(--font-jakarta)'}}>
+                <div className="bg-white/5 w-70 p-3 rounded-md border border-white/0 hover:border-white/40 transition-all">
+                        {featuredPost.map((post, i) => (
+                        <h4 className="text-sm md:text-xs leading-snug group-hover:underline text-black dark:text-white tracking-wide mb-2" style={{fontFamily: "var(--font-jakarta)", fontWeight: "200"}}>
                         {post.title}
-                    </h4>
-                    <div className="h-px w-full bg-black/10 dark:bg-white/10 mt-4" />
+                        </h4>
+                        ))}
+                    <img src="/bg1.png" alt="" className='w-[75]%' />
+                </div>
+                {blogPosts.map((post, i) => (
+                <div key={i} className="group cursor-pointer">
+                    <div className='flex flex-col bg-white/5 border border-white/0 hover:border-white/40 transition-all p-2 rounded-md w-70 x-auto'>
+                        <p className='text-xs'>{post.date}</p>
+                        <div className='flex flex-row gap-3  px-2 py-1 mt-2 rounded-xl items-center'>
+                        <img src="/bg1.png" alt="post.title" className='h-15 w-15 aspect-square' />
+                        <h4 className="text-sm md:text-sm leading-snug group-hover:underline text-black dark:text-white/70 tracking-wide" style={{fontFamily: "var(--font-jakarta)", fontWeight: "200"}}>
+                        {post.title}
+                        </h4>
+                    </div>
+                    </div>                    
                 </div>
                 ))}
             </div>

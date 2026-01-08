@@ -53,7 +53,7 @@ export default function Hero() {
 
   useGSAP(() => {
     gsap.from(".hero-text-anim", {
-      y: 100, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out", delay: 0.2
+      y: 100, opacity: 100, duration: 1.2, stagger: 0.1, ease: "power4.out", delay: 0.2
     });
   }, { scope: containerRef });
 
@@ -65,7 +65,7 @@ export default function Hero() {
         {/* Default */}
         <div className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeProject ? 'opacity-0' : 'opacity-100'}`}>
              {/* CAMBIO 1: Quitamos 'opacity-80'. Ahora es 100% brillante. */}
-             <Image src="/bg1.png" alt="Background" fill className="object-cover" priority />
+             <Image src="/bg1.png" alt="Background" fill className="object-cover opacity-40" priority />
         </div>
         
         {/* Proyectos */}
@@ -74,14 +74,13 @@ export default function Hero() {
              key={project.id}
              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeProject === project.id ? 'opacity-100' : 'opacity-0'}`}
            >
-              <Image src={project.bg} alt={project.name} fill className="object-cover scale-105 z-0" />
+              <Image src={project.bg} alt={project.name} fill className="object-cover scale-105 z-0 opacity-40" />
            </div>
         ))}
       </div>
 
       {/* === PISO 10: GRADIENTE (Opcional) === */}
       {/* Si quieres ver la imagen PURA, borra esta línea. Si la dejas, le bajé la opacidad al negro. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60  to-black/100 z-10 pointer-events-none" />
 
 
       {/* === PISO 50: TEXTO Y CONTENIDO === */}
@@ -144,7 +143,7 @@ export default function Hero() {
               </div>
             ) : (
               <div className="hero-text-anim text-left md:text-right transition-all duration-500">
-                <p className="text-sm md:text-sm font-jakarta font-light text-white/80 leading-relaxed">
+                <p className="text-sm md:text-sm font-jakarta font-light text-white/80 leading-relaxed z-100">
                   Since 2006, we've helped the most innovative startups and reputable brands design products worth talking about.
                 </p>
                 <div className="mt-6 flex justify-start md:justify-end">

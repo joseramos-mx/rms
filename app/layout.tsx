@@ -12,7 +12,7 @@ import FullScreenMenu from './components/FullScreenMenu'; // Lo crearemos pronto
 export default function RootLayout({ children }: { children: React.ReactNode }) {  return (
     // Agregamos suppressHydrationWarning para next-themes
     <html lang="es" className={`${jakarta.variable} ${noopla.variable} ${fraunces.variable}`} suppressHydrationWarning>
-      <body className=" text-white antialiased overflow-x-hidden md:cursor-none transition-colors duration-300 dark:bg-black bg-white dark:text-white text-black selection:bg-lime-400 selection:text-black">
+      <body className="antialiased overflow-x-hidden md:cursor-none transition-colors duration-300 dark:bg-black bg-white dark:text-white text-black selection:bg-lime-400 selection:text-black" style={{fontFamily:"var(--font-jakarta)"}}>
         {/* Configuración de next-themes */}
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <MenuProvider>
