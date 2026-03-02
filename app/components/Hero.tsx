@@ -21,7 +21,7 @@ const projects = [
     id: 2,
     name: 'Deuz',
     image: '/deuz.png',
-    bg: 'https://imagekit.io/player/embed/0i4our85y/introvideo.mp4?controls=false&autoplay=true&loop=true&muted=true&background=%23000000&updatedAt=1764700051165&thumbnail=https%3A%2F%2Fik.imagekit.io%2F0i4our85y%2Fintrovideo.mp4%2Fik-thumbnail.jpg%3FupdatedAt%3D1764700051165',
+    bg: 'https://ik.imagekit.io/0i4our85y/introvideo.mp4',
     description: 'Grupo de construcción',
     textPos: 'items-center text-center',
     accent: 'text-red-600'
@@ -30,7 +30,7 @@ const projects = [
     id: 3,
     name: 'HockeyStick',
     image: '/hs.png',
-    bg: 'https://imagekit.io/player/embed/0i4our85y/0302.mp4?controls=false&autoplay=true&loop=true&muted=true&background=%23000000&thumbnail=https%3A%2F%2Fik.imagekit.io%2F0i4our85y%2F0302.mp4%2Fik-thumbnail.jpg%3FupdatedAt%3D1772486957764', // Temporal
+    bg: 'https://ik.imagekit.io/0i4our85y/0302.mp4', // Temporal
     description: 'Soluciones para PyMes',
     textPos: 'items-end text-right pr-10 md:pr-20',
     accent: 'text-purple-400'
@@ -55,13 +55,15 @@ export default function Hero() {
       <div className="absolute inset-0 -z-10">
         {/* Default */}
         <div className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeProject ? 'opacity-0' : 'opacity-100'}`}>
-          <iframe
-            src="https://imagekit.io/player/embed/0i4our85y/0302%20(1).mp4?controls=false&autoplay=true&loop=true&muted=true&background=%23000000&thumbnail=https%3A%2F%2Fik.imagekit.io%2F0i4our85y%2F0302%2520%281%29.mp4%2Fik-thumbnail.jpg%3FupdatedAt%3D1772488434661"
-            allow="autoplay; fullscreen"
-            className="w-full h-full pointer-events-none scale-105"
-            style={{ border: 'none' }}
+          <video
+            src="https://ik.imagekit.io/0i4our85y/0302%20(1).mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover pointer-events-none scale-105"
           />
-          {/* Overlay for iframe video */}
+          {/* Overlay for video */}
           <div className="absolute inset-0 bg-black/70 z-10 pointer-events-none mix-blend-multiply" />
         </div>
 

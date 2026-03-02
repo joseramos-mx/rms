@@ -71,7 +71,7 @@ export default function FullScreenMenu() {
     transition-all duration-300 ease-in-out
     ${isOpen ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'}
     
-    bg-white dark:bg-gray-950 md:bg-transparent md:dark:bg-transparent
+    bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent
   `}
         >
             {/* === MARCOS (FRAMES) ESTÁTICOS === */}
@@ -89,7 +89,7 @@ export default function FullScreenMenu() {
 
 
             {/* === CONTENIDO === */}
-            <div className="relative z-10 w-full h-full grid grid-cols-1 md:grid-cols-12 px-6 md:px-12 py-24 pointer-events-none overflow-y-auto md:overflow-hidden">
+            <div className="relative z-10 w-full h-full grid grid-cols-1 md:grid-cols-12 px-6 md:px-12 py-24 pointer-events-auto md:pointer-events-none overflow-y-auto md:overflow-hidden">
                 {/* Nota: Agregué overflow-y-auto arriba por si el menú es muy largo en móvil */}
 
                 {/* Botones Flotantes */}
