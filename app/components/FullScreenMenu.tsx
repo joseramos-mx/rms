@@ -7,13 +7,17 @@ import { useTheme } from 'next-themes';
 import { Sun, Moon } from '@phosphor-icons/react/dist/ssr';
 import { useMenu } from '../context/ContextMenu';
 
-const mainLinks = ["Qué hacemos", "Sobre nosotros", "Noticias", "Contacto"];
+const mainLinks = [
+    { name: "Qué hacemos", url: "/que-hacemos" },
+    { name: "Sobre nosotros", url: "/sobre-nosotros" },
+    { name: "Noticias", url: "#" },
+    { name: "Contacto", url: "/contacto" }
+];
 const projectLinks = [
     {
         id: 1,
         link: 'JAU',
-        // USA LA CLASE COMPLETA AQUÍ:
-        color: 'bg-white/10 text-white hover:bg-emerald-600',
+        color: 'bg-white/10 text-white hover:bg-zinc-500',
         url: '/jau',
     },
     {
@@ -34,15 +38,21 @@ const projectLinks = [
         color: 'bg-white/10 text-white hover:bg-amber-600',
         url: '/ctodo',
     },
+    {
+        id: 5,
+        link: 'Proyecto U',
+        color: 'bg-white/10 text-white hover:bg-emerald-600',
+        url: '/prusem',
+    },
 ];
 
-const blogPosts = [
-    { id: 1, date: "Jul 2025", title: "PlayerZero raises $16M in a Series A funding round" },
-    { id: 2, date: "Jun 2025", title: "Designing a New Relationship with AI by Sara Vienna" },
-    { id: 3, date: "Ene 2026", title: "Metalab named Design Company of the Year finalist" },
+const blogPosts: { id: number; date: string; title: string; image?: string }[] = [
+    { id: 1, date: "Jul 2025", title: "Cómo la IA transformo nuestros procesos", image: "bg1.png" },
+    { id: 2, date: "Jun 2025", title: "La IA y la robotica en la industria", image: "sirka.jpg" },
+    { id: 3, date: "Ene 2026", title: "Estudios de diseño que cambiaran tu forma de ver el diseño", image: "meta.webp" },
 ];
-const featuredPost = [
-    { id: 1, date: "Jul 2025", title: "Ve nuestro study case de ¡Con Todo!", image: "/bg1.png" }
+const featuredPost: { id: number; date: string; title: string; image?: string }[] = [
+    { id: 1, date: "Jan 2026", title: "Ve nuestro study case de Proyecto U", image: "pru.png" }
 ]
 
 export default function FullScreenMenu() {
@@ -90,16 +100,18 @@ export default function FullScreenMenu() {
                 {/* Links Izquierda */}
                 <div className="md:col-span-3 flex flex-col justify-center h-full pointer-events-auto mb-10 md:mb-0">
                     <nav className="flex flex-col gap-6 items-start">
-                        <img src="logo_rms_w.svg" alt="" className="h-6" />
+                        <Link href="/">
+                            <img src="logo_rms_w.svg" alt="" className="h-6" />
+                        </Link>
                         {mainLinks.map((link, i) => (
                             <Link
                                 key={i}
-                                href="#"
+                                href={link.url}
                                 onClick={closeMenu}
                                 className="text-4xl md:text-sm md:hover:text-xl transition-all hover-target font-noopla hover:opacity-50 text-black dark:text-white"
                                 style={{ fontFamily: 'var(--font-jakarta)' }}
                             >
-                                {link}
+                                {link.name}
                             </Link>
                         ))}
                     </nav>
@@ -125,18 +137,21 @@ export default function FullScreenMenu() {
                 <div className="md:col-span-3 flex flex-col gap-2 justify-center h-full md:pl-8 pointer-events-auto " style={{ fontFamily: 'var(--font-jakarta)' }}>
                     <div className="bg-white/5 w-70 p-3 rounded-md border border-white/0 hover:border-white/40 transition-all">
                         {featuredPost.map((post, i) => (
-                            <h4 key={post.id || i} className="text-sm md:text-xs leading-snug group-hover:underline text-black dark:text-white tracking-wide mb-2" style={{ fontFamily: "var(--font-jakarta)", fontWeight: "200" }}>
-                                {post.title}
-                            </h4>
+                            <div key={post.id || i}>
+                                <h4 className="text-sm md:text-xs leading-snug group-hover:underline text-black dark:text-white tracking-wide mb-2" style={{ fontFamily: "var(--font-jakarta)", fontWeight: "200" }}>
+                                    {post.title}
+                                </h4>
+                                <img src={post.image} alt={post.title} className="w-[100%] rounded-md" />
+                            </div>
                         ))}
-                        <img src="/bg1.png" alt="" className='w-[75]%' />
                     </div>
                     {blogPosts.map((post, i) => (
                         <div key={i} className="group cursor-pointer">
                             <div className='flex flex-col bg-white/5 border border-white/0 hover:border-white/40 transition-all p-2 rounded-md w-70 x-auto'>
                                 <p className='text-xs'>{post.date}</p>
                                 <div className='flex flex-row gap-3  px-2 py-1 mt-2 rounded-xl items-center'>
-                                    <img src="/bg1.png" alt="post.title" className='h-15 w-15 aspect-square' />
+                                    {/* Defaulting to an original image if post.image isn't defined yet */}
+                                    <img src={post.image || "/bg1.png"} alt={post.title} className='h-15 w-15 aspect-square object-cover rounded-md' />
                                     <h4 className="text-sm md:text-sm leading-snug group-hover:underline text-black dark:text-white/70 tracking-wide" style={{ fontFamily: "var(--font-jakarta)", fontWeight: "200" }}>
                                         {post.title}
                                     </h4>
