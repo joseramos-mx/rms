@@ -67,7 +67,7 @@ export default function FullScreenMenu() {
     return (
         <div
             className={`
-    fixed inset-0 z-90 flex flex-col justify-center items-center
+    fixed inset-0 z-90 flex flex-col md:justify-center
     transition-all duration-300 ease-in-out
     ${isOpen ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'}
     
@@ -89,8 +89,8 @@ export default function FullScreenMenu() {
 
 
             {/* === CONTENIDO === */}
-            <div className="relative z-10 w-full h-full grid grid-cols-1 md:grid-cols-12 px-6 md:px-12 py-24 pointer-events-auto md:pointer-events-none overflow-y-auto md:overflow-hidden">
-                {/* Nota: Agregué overflow-y-auto arriba por si el menú es muy largo en móvil */}
+            <div className="relative z-10 w-full h-full flex flex-col md:grid md:grid-cols-12 px-6 md:px-12 py-24 pointer-events-auto md:pointer-events-none overflow-y-scroll md:overflow-hidden">
+                {/* Nota: Agregué overflow-y-scroll arriba por si el menú es muy largo en móvil */}
 
                 {/* Botones Flotantes */}
                 <div className="absolute top-6 right-6 md:top-24 md:right-12 flex flex-col gap-4 pointer-events-auto">
@@ -98,7 +98,7 @@ export default function FullScreenMenu() {
                 </div>
 
                 {/* Links Izquierda */}
-                <div className="md:col-span-3 flex flex-col justify-center h-full pointer-events-auto mb-10 md:mb-0">
+                <div className="md:col-span-3 flex shrink-0 flex-col justify-center md:h-full pointer-events-auto py-10 md:py-0">
                     <nav className="flex flex-col gap-6 items-start">
                         <Link href="/">
                             <img src="logo_rms_w.svg" alt="" className="h-6" />
@@ -134,7 +134,7 @@ export default function FullScreenMenu() {
                 <div className="hidden md:block md:col-span-6 pointer-events-none  z-0"></div>
 
                 {/* Blog Derecha */}
-                <div className="md:col-span-3 flex flex-col gap-2 justify-center h-full md:pl-8 pointer-events-auto " style={{ fontFamily: 'var(--font-jakarta)' }}>
+                <div className="md:col-span-3 flex shrink-0 flex-col gap-2 justify-center md:h-full md:pl-8 pointer-events-auto pb-32 md:pb-0" style={{ fontFamily: 'var(--font-jakarta)' }}>
                     <div className="bg-white/5 w-70 p-3 rounded-md border border-white/0 hover:border-white/40 transition-all">
                         {featuredPost.map((post, i) => (
                             <div key={post.id || i}>

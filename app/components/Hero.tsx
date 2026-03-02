@@ -1,10 +1,11 @@
 "use client";
 import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import TextType from './TextType';
+import { useEffect } from 'react';
+import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 
 // 1. DATA
 const projects = [
@@ -48,6 +49,15 @@ export default function Hero() {
     });
   }, { scope: containerRef });
 
+  useEffect(() => {
+    // Force play on all videos to help bypass iOS Safari autoplay restrictions
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+      video.muted = true;
+      video.play().catch(e => console.log('Autoplay prevented by iOS:', e));
+    });
+  }, [activeProject]);
+
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex flex-col justify-end pb-10 md:pb-20 px-6">
 
@@ -57,10 +67,10 @@ export default function Hero() {
         <div className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeProject ? 'opacity-0' : 'opacity-100'}`}>
           <video
             src="https://ik.imagekit.io/0i4our85y/0302%20(1).mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
             className="w-full h-full object-cover pointer-events-none scale-105"
           />
           {/* Overlay for video */}
@@ -89,10 +99,10 @@ export default function Hero() {
                 <>
                   <video
                     src={project.bg}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                    autoPlay={true}
+                    loop={true}
+                    muted={true}
+                    playsInline={true}
                     className="object-cover w-full h-full"
                   />
                   {/* Overlay for direct video */}
