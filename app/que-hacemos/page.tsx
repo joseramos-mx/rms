@@ -120,17 +120,16 @@ export default function QueHacemos() {
 
                         <div className="flex flex-col gap-0 border-t border-white/10">
                             {businessLines.map((line, i) => (
-                                <div key={i} className="group flex flex-col md:flex-row justify-between items-start md:items-center py-10 md:py-16 border-b border-white/10 cursor-default hover:bg-white/5 transition-colors duration-500 md:px-8 -mx-8 sm:mx-0 sm:px-4 rounded-2xl gap-8 md:gap-0">
-                                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8">
+                                <div key={i} className="group flex flex-col md:flex-row justify-between items-start md:items-center py-10 md:py-16 border-b border-white/10 cursor-default hover:bg-white/5 transition-colors duration-500 md:px-8 -mx-6 sm:mx-0 px-6 sm:px-4 rounded-none md:rounded-2xl gap-6 md:gap-0">
+                                    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 w-full md:w-auto">
                                         <div className="w-16 h-16 md:w-20 md:h-20 shrink-0 relative opacity-40 group-hover:opacity-100 transition-opacity duration-500">
-                                            {/* Si los SVGs existen en /public, Image de Next o img tag funciona. Usamos img de momento */}
                                             <img src={line.icon} alt={line.name} className="w-full h-full object-contain" />
                                         </div>
                                         <h3 className="text-3xl md:text-4xl lg:text-5xl font-light font-fraunces text-white/40 group-hover:text-white transition-colors duration-500">
                                             {line.name}
                                         </h3>
                                     </div>
-                                    <p className="text-white/50 text-base md:text-xl font-light max-w-sm md:max-w-md lg:max-w-lg md:text-right group-hover:text-white/80 transition-colors duration-500 leading-relaxed">
+                                    <p className="text-white/50 text-base md:text-xl font-light w-full md:max-w-md lg:max-w-lg text-left md:text-right group-hover:text-white/80 transition-colors duration-500 leading-relaxed mt-2 md:mt-0">
                                         {line.description}
                                     </p>
                                 </div>
